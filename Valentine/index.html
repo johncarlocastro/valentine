@@ -1,0 +1,311 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Our Love Diary 💖</title>
+
+
+<link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;600&family=Playfair+Display:wght@600&display=swap" rel="stylesheet">
+
+
+<style>
+body {
+    margin: 0;
+    font-family: 'Fredoka', sans-serif;
+    background: linear-gradient(135deg, #0f0c29, #302b63, #ff758c);
+    background-size: 400% 400%;
+    animation: gradient 15s ease infinite;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    overflow: hidden;
+    color: white;
+}
+
+
+@keyframes gradient {
+    0% {background-position:0% 50%;}
+    50% {background-position:100% 50%;}
+    100% {background-position:0% 50%;}
+}
+
+
+.container {
+    width: 95%;
+    max-width: 420px;
+    text-align: center;
+    position: relative;
+}
+
+
+.hidden { display: none; }
+
+
+.glow {
+    font-family: 'Playfair Display', serif;
+    font-size: 26px;
+    text-shadow: 0 0 10px #ff4da6,
+                 0 0 20px #ff4da6,
+                 0 0 40px #ff1a75;
+}
+
+
+button {
+    padding: 12px 20px;
+    border: none;
+    border-radius: 25px;
+    cursor: pointer;
+    font-size: 15px;
+    margin-top: 15px;
+}
+
+
+.unlock, .yes-btn {
+    background: #ff1a75;
+    color: white;
+}
+
+
+.no-btn {
+    background: white;
+    color: black;
+    position: absolute;
+}
+
+
+.buttons {
+    position: relative;
+    margin-top: 20px;
+}
+
+
+.countdown {
+    font-size: 14px;
+    margin-top: 10px;
+}
+
+
+/* Appreciation Layout */
+.appreciation-wrapper {
+    display: flex;
+    gap: 15px;
+    align-items: flex-start;
+}
+
+
+/* Pink Glowing Border + Fade In */
+.appreciation-text {
+    text-align: left;
+    font-size: 20px;
+    font-weight: 600;
+    line-height: 1.6;
+    padding: 20px;
+    border-radius: 20px;
+    flex: 1;
+    background: rgba(255,255,255,0.08);
+    border: 2px solid #ff4da6;
+    box-shadow: 0 0 15px #ff4da6,
+                0 0 30px #ff1a75;
+    opacity: 0;
+    animation: fadeIn 2s ease forwards;
+}
+
+
+@keyframes fadeIn {
+    to { opacity: 1; }
+}
+
+
+/* Floating Photos */
+.floating-photos {
+    position: relative;
+    width: 120px;
+}
+
+
+.float-img {
+    width: 100px;
+    height: 100px;
+    object-fit: cover;
+    border-radius: 15px;
+    box-shadow: 0 0 20px rgba(255,105,180,0.7);
+    position: absolute;
+    animation: float 4s ease-in-out infinite;
+}
+
+
+.float1 { top: 0; left: 0; animation-delay: 0s; }
+.float2 { top: 110px; left: 10px; animation-delay: 1s; }
+.float3 { top: 220px; left: 0; animation-delay: 2s; }
+
+
+@keyframes float {
+    0% { transform: translateY(0px); }
+    50% { transform: translateY(-10px); }
+    100% { transform: translateY(0px); }
+}
+
+
+/* Falling Hearts */
+.heart {
+    position: absolute;
+    top: -10px;
+    font-size: 18px;
+    animation: fall linear forwards;
+}
+
+
+@keyframes fall {
+    to {
+        transform: translateY(110vh);
+        opacity: 0;
+    }
+}
+</style>
+</head>
+
+
+<body>
+
+
+<div class="container">
+
+
+<!-- LOCK SCREEN -->
+<div id="lockScreen">
+    <h2>🔐 A Love Diary</h2>
+    <p>Only MICA can unlock this ❤️</p>
+    <button class="unlock" onclick="unlock()">Unlock My Heart</button>
+</div>
+
+
+<!-- PAGE 1 -->
+<div id="page1" class="hidden">
+    <h1 class="glow">MICA JHEN SANTOS💕</h1>
+
+
+    <div class="countdown" id="countdown"></div>
+
+
+    <p>
+        You make my world softer and brighter 🌹<br><br>
+        Will you be my Valentine?
+    </p>
+
+
+    <div class="buttons">
+        <button class="yes-btn" onclick="goToPage2()">Yes 💖</button>
+        <button class="no-btn" id="noBtn" onmouseover="moveNo()">No 😢</button>
+    </div>
+</div>
+
+
+<!-- PAGE 2 -->
+<div id="page2" class="hidden">
+
+
+    <h1 class="glow">For You ❤️</h1>
+
+
+    <div class="appreciation-wrapper">
+
+
+        <div class="appreciation-text">
+            I appreciate you more than words can explain. 💕<br><br>
+            Your love, your smile, your presence —
+            they mean everything to me.
+        </div>
+
+
+        <div class="floating-photos">
+            <img src="c:\Users\Ramstore\Downloads\6.jpg" class="float-img float1">
+            <img src="c:\Users\Ramstore\Downloads\5.jpg" class="float-img float2">
+            <img src="c:\Users\Ramstore\Downloads\2.jpg" class="float-img float3">
+        </div>
+
+
+    </div>
+
+
+</div>
+
+
+</div>
+
+
+<script>
+
+
+function unlock() {
+    document.getElementById("lockScreen").classList.add("hidden");
+    document.getElementById("page1").classList.remove("hidden");
+}
+
+
+function goToPage2() {
+    document.getElementById("page1").classList.add("hidden");
+    document.getElementById("page2").classList.remove("hidden");
+    startHearts();
+}
+
+
+function moveNo() {
+    const btn = document.getElementById("noBtn");
+    const x = Math.random() * 200 - 100;
+    const y = Math.random() * 150 - 75;
+    btn.style.transform = `translate(${x}px, ${y}px)`;
+}
+
+
+function updateCountdown() {
+    const now = new Date();
+    const year = now.getFullYear();
+    const valentines = new Date(year, 1, 14);
+    if (now > valentines) {
+        valentines.setFullYear(year + 1);
+    }
+    const diff = valentines - now;
+
+
+    const days = Math.floor(diff / (1000 * 60 * 60 * 24));
+    const hours = Math.floor((diff / (1000 * 60 * 60)) % 24);
+    const minutes = Math.floor((diff / (1000 * 60)) % 60);
+
+
+    document.getElementById("countdown").innerHTML =
+        `⏳ ${days} days ${hours} hours ${minutes} minutes until Valentine's Day 💘`;
+}
+
+
+setInterval(updateCountdown, 1000);
+updateCountdown();
+
+
+/* Falling Hearts Function */
+function startHearts() {
+    setInterval(() => {
+        const heart = document.createElement("div");
+        heart.classList.add("heart");
+        heart.innerHTML = "💖";
+        heart.style.left = Math.random() * 100 + "vw";
+        heart.style.animationDuration = (3 + Math.random() * 3) + "s";
+        document.body.appendChild(heart);
+
+
+        setTimeout(() => {
+            heart.remove();
+        }, 6000);
+    }, 400);
+}
+
+
+</script>
+
+
+</body>
+</html>
+
+
+
